@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Avalanche</string>
+    <string name="menu">Menu</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="sound_on">Sound on</string>
+    <string name="chill_mode">Chill mode</string>
+    <string name="highscores">Highscores</string>
+    <string name="play">Play</string>
+</resources>
