@@ -2,10 +2,12 @@ package com.example.avalanche;
 
 public class Obstacle extends Circle {
     private boolean deletionFlag;
+    private boolean isRed;
 
-    public Obstacle(int x, int y, int diameter) {
+    public Obstacle(int x, int y, int diameter, boolean isRed) {
         super(x, y, diameter);
         deletionFlag = false;
+        this.isRed = isRed;
     }
 
     public void updateObstacle(int screenHeight, double speedMultiplication) {
@@ -19,5 +21,9 @@ public class Obstacle extends Circle {
 
     public void setDeletionFlag(boolean deletionFlag) {
         this.deletionFlag = deletionFlag;
+    }
+
+    public boolean isRed() {
+        return isRed;
     }
 }

@@ -19,6 +19,7 @@ public class GameModel {
     private int updateCounter;
     Random random = new Random();
     private double speedMultiplication;
+    private long score;
 
     GameModel(int width, int height) {
         this.width = width;
@@ -28,13 +29,18 @@ public class GameModel {
         backgroundPoint2 = new Point(0, -height);
         updateCounter = 0;
         Obstacles = new LinkedList<>();
+        score = 0;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    public void update() {
+    public boolean update() {
         if(updateCounter == 40) {
             updateCounter = 0;
-            Obstacle obstacle = new Obstacle(random.nextInt(width), 0, 200);
+            Random random = new Random();
+            int randomNumber = random.nextInt(5);
+            Obstacle obstacle;
+            if(randomNumber == 0) obstacle = new Obstacle(random.nextInt(width), 0, 200, true);
+            else obstacle = new Obstacle(random.nextInt(width), 0, 200, false);
             Obstacles.add(obstacle);
         }
         updateCounter++;
@@ -60,11 +66,13 @@ public class GameModel {
         for(Obstacle obstacle: Obstacles) {
             obstacle.updateObstacle(height, speedMultiplication);
             if(ball.collision(obstacle)) {
+                if(obstacle.isRed()) score+= (long) ball.getDiameter() * ball.getDiameter();
                 obstacle.setDeletionFlag(true);
                 ball.decreaseSize();
             }
         }
         Obstacles.removeIf(Obstacle::isDeletionFlag);
+        return !ball.isBallTooSmall();
     }
 
     public Point getBackgroundPoint1() {
@@ -81,5 +89,9 @@ public class GameModel {
 
     public LinkedList<Obstacle> getObstacles() {
         return Obstacles;
+    }
+
+    public long getScore() {
+        return score;
     }
 }

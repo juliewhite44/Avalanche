@@ -7,4 +7,6 @@
     <string name="chill_mode">Chill mode</string>
     <string name="highscores">Highscores</string>
     <string name="play">Play</string>
+    <string name="game_over">Game Over</string>
+    <string name="play_again">Play again</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.avalanche;
 
+import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -7,13 +8,15 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener, Runnable {
 
-    //Button back;
     private GameView gameView;
     private GameModel gameModel;
     private SensorManager sensorManager = null;
@@ -26,17 +29,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
-        //setContentView(R.layout.play);
-
-        //back = (Button) findViewById(R.id.back);
-        //back.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(GameActivity.this, MainActivity.class);
-//                startActivity(intent);
-//            }
-//        });
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -92,9 +84,12 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         long timeDiff;
         while(isPlaying) {
             beginTime = System.currentTimeMillis();
-            gameModel.update();
+            if(!gameModel.update()) {
+                Intent intent = new Intent(GameActivity.this, GameOver.class);
+                startActivity(intent);
+            }
             gameView.draw(gameModel.getBackgroundPoint1(), gameModel.getBackgroundPoint2(),
-                    gameModel.getBall(), gameModel.getObstacles());
+                    gameModel.getBall(), gameModel.getObstacles(), gameModel.getScore());
             timeDiff = System.currentTimeMillis() - beginTime;
 
             try {
