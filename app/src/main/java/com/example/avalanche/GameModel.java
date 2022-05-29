@@ -17,7 +17,6 @@ public class GameModel {
     private final Point backgroundPoint2;
     private LinkedList<Obstacle> Obstacles;
     private int updateCounter;
-    Random random = new Random();
     private double speedMultiplication;
     private long score;
 

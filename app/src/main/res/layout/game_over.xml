@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/menu"
+        android:id="@+id/game_over_text"
         android:layout_width="178dp"
         android:layout_height="93dp"
         android:layout_alignParentStart="true"
@@ -38,7 +38,7 @@
         android:id="@+id/back"
         android:layout_width="177dp"
         android:layout_height="71dp"
-        android:layout_below="@+id/menu"
+        android:layout_below="@+id/game_over_text"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_centerHorizontal="true"

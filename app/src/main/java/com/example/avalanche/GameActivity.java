@@ -1,5 +1,6 @@
 package com.example.avalanche;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
+
+import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener, Runnable {
 
@@ -27,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
 
@@ -85,7 +90,8 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         while(isPlaying) {
             beginTime = System.currentTimeMillis();
             if(!gameModel.update()) {
-                Intent intent = new Intent(GameActivity.this, GameOver.class);
+                Intent intent = new Intent(GameActivity.this, InsertUsername.class);
+                intent.putExtra("score", gameModel.getScore());
                 startActivity(intent);
             }
             gameView.draw(gameModel.getBackgroundPoint1(), gameModel.getBackgroundPoint2(),
