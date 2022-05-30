@@ -22,6 +22,6 @@ public class Constant {
     public static final String DATABASE_NAME = "avalanche-database";
     public static final String TURN_CHILL_OFF_TEXT = "Turn chill mode off";
     public static final String TURN_CHILL_ON_TEXT = "Turn chill mode on";
-    public static final String TURN_SOUND_OFF_TEXT = "Turn raw off";
-    public static final String TURN_SOUND_ON_TEXT = "Turn raw on";
+    public static final String TURN_SOUND_OFF_TEXT = "Turn sounds off";
+    public static final String TURN_SOUND_ON_TEXT = "Turn sounds on";
 }

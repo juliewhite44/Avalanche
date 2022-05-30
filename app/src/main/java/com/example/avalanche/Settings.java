@@ -10,21 +10,13 @@ import androidx.annotation.Nullable;
 
 public class Settings extends Activity {
     private static boolean chillMode = false;
-
     public static boolean isChillMode() {
         return chillMode;
     }
-    public static void setChillMode(boolean chillMode) {
-        Settings.chillMode = chillMode;
-    }
 
     private static boolean sound = true;
-
     public static boolean isSound() {
         return sound;
-    }
-    public static void setSound(boolean sound) {
-        Settings.sound = sound;
     }
 
     @Override
@@ -59,8 +51,14 @@ public class Settings extends Activity {
         soundButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(soundButton.getText().toString().equals(Constant.TURN_SOUND_ON_TEXT)) soundButton.setText(Constant.TURN_SOUND_OFF_TEXT);
-                else soundButton.setText(Constant.TURN_SOUND_ON_TEXT);
+                if(soundButton.getText().toString().equals(Constant.TURN_SOUND_ON_TEXT)) {
+                    startService(new Intent(Settings.this, ThemeSoundService.class));
+                    soundButton.setText(Constant.TURN_SOUND_OFF_TEXT);
+                }
+                else {
+                    stopService(new Intent(Settings.this, ThemeSoundService.class));
+                    soundButton.setText(Constant.TURN_SOUND_ON_TEXT);
+                }
                 sound = !sound;
             }
         });

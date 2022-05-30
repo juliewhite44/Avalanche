@@ -99,7 +99,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 intent.putExtra(Constant.INTENT_EXTRA_TIME_KEY, displayTime);
                 startActivity(intent);
             }
-            if(gameModel.isCollisionNow()) startService(new Intent(GameActivity.this, SnowballSoundService.class));
+            if(gameModel.isCollisionNow() && Settings.isSound()) startService(new Intent(GameActivity.this, SnowballSoundService.class));
             gameView.draw(gameModel.getUpper_left_point1(), gameModel.getUpper_left_point2(),
                     gameModel.getBall(), gameModel.getObstacles(), gameModel.getScore());
             timeDiff = System.currentTimeMillis() - beginTime;
