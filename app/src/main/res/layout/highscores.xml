@@ -3,19 +3,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
+
     <TextView
         android:id="@+id/menu"
-        android:layout_width="178dp"
-        android:layout_height="93dp"
+        android:layout_width="295dp"
+        android:layout_height="91dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="126dp"
-        android:layout_marginEnd="116dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="59dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="57dp"
         android:gravity="center"
         android:text="@string/highscores"
-        android:textSize="20sp" />
+        android:textColor="#000000"
+        android:textSize="40sp" />
 
     <Button
         android:id="@+id/back"
@@ -24,9 +34,9 @@
         android:layout_alignEnd="@+id/menu"
         android:layout_alignBottom="@+id/menu"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="-100dp"
-        android:layout_marginBottom="139dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="-43dp"
+        android:layout_marginBottom="138dp"
         android:gravity="center"
         android:text="@string/back"
         android:textSize="20sp" />

@@ -1,6 +1,6 @@
 package com.example.avalanche;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,15 +9,12 @@ import android.hardware.SensorManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.room.Room;
 
-import java.util.List;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends AppCompatActivity implements SensorEventListener, Runnable {
 
@@ -91,15 +88,24 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
             beginTime = System.currentTimeMillis();
             if(!gameModel.update()) {
                 Intent intent = new Intent(GameActivity.this, InsertUsername.class);
-                intent.putExtra("score", gameModel.getScore());
+                intent.putExtra(Constant.INTENT_EXTRA_SCORE_KEY, gameModel.getScore());
+
+                Date date = new Date();
+                long milisFromGameStart = date.getTime() - gameView.getStartTime();
+                int seconds = (int) (milisFromGameStart / 1000) % 60 ;
+                int minutes = (int) ((milisFromGameStart / (1000*60)) % 60);
+                int hours   = (int) ((milisFromGameStart / (1000*60*60)) % 24);
+                @SuppressLint("DefaultLocale") String displayTime = String.format("%01d:%02d:%02d", hours, minutes, seconds);
+                intent.putExtra(Constant.INTENT_EXTRA_TIME_KEY, displayTime);
                 startActivity(intent);
             }
-            gameView.draw(gameModel.getBackgroundPoint1(), gameModel.getBackgroundPoint2(),
+            if(gameModel.isCollisionNow()) startService(new Intent(GameActivity.this, SnowballSoundService.class));
+            gameView.draw(gameModel.getUpper_left_point1(), gameModel.getUpper_left_point2(),
                     gameModel.getBall(), gameModel.getObstacles(), gameModel.getScore());
             timeDiff = System.currentTimeMillis() - beginTime;
 
             try {
-                Thread.sleep((int) Math.max(0, (int)17-timeDiff));
+                Thread.sleep((int) Math.max(0, Constant.FRAME_LENGTH-timeDiff));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

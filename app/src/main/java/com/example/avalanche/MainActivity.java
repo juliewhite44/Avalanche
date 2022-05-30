@@ -4,16 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        startService(new Intent(MainActivity.this, ThemeSoundService.class));
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button highsc = findViewById(R.id.highscores);
-        highsc.setOnClickListener(view -> {
+        Button highscores = findViewById(R.id.highscores);
+        highscores.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, Highscores.class);
             startActivity(intent);
         });
@@ -36,5 +36,11 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Settings.class);
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(MainActivity.this, ThemeSoundService.class));
+        super.onDestroy();
     }
 }

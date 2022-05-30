@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.util.Date;
+
 public class GameOver extends Activity {
     Button back;
     Button playAgain;
@@ -20,7 +22,7 @@ public class GameOver extends Activity {
         setContentView(R.layout.game_over);
 
         TextView gameOverText = findViewById(R.id.game_over_text);
-        gameOverText.setText("Game Over\nScore:" + getIntent().getExtras().getLong("score"));
+        gameOverText.setText("Game Over\nScore: " + getIntent().getExtras().getLong(Constant.INTENT_EXTRA_SCORE_KEY)+"\nTime: " + getIntent().getExtras().getString(Constant.INTENT_EXTRA_TIME_KEY));
 
         back = findViewById(R.id.back);
         back.setOnClickListener(view -> {

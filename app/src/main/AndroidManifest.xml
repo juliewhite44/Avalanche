@@ -27,6 +27,8 @@
         <activity android:name=".Highscores" />
         <activity android:name=".Settings" />
         <activity android:name=".GameOver" />
+        <service android:name=".ThemeSoundService"  android:enabled="true"></service>
+        <service android:name=".SnowballSoundService"  android:enabled="true"></service>
     </application>
 
 </manifest>

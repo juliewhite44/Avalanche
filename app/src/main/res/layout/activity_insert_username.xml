@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".InsertUsername">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="202dp"
@@ -16,7 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.201" />
+        app:layout_constraintVertical_bias="0.201"
+        android:textColor="#000000" />
 
     <EditText
         android:id="@+id/editTextUsername"
@@ -30,7 +39,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="LabelFor,MissingConstraints" />
+        tools:ignore="LabelFor,MissingConstraints"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/game_over"

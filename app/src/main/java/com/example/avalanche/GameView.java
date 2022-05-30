@@ -24,6 +24,10 @@ public class GameView extends SurfaceView {
     private Bitmap obstacleRedBitmap;
     private long startTime;
 
+    public long getStartTime() {
+        return startTime;
+    }
+
 
     public GameView(Context context, int width, int height) {
         super(context);
@@ -31,7 +35,7 @@ public class GameView extends SurfaceView {
         this.width = width;
         paint = new Paint();
         paint.setColor(Color.BLACK);
-        paint.setTextSize(50);
+        paint.setTextSize(Constant.SCORE_TIME_TEXT_SIZE);
         backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, width, height, false);
         ballBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.snowball);
@@ -65,9 +69,9 @@ public class GameView extends SurfaceView {
             int hours   = (int) ((milisFromGameStart / (1000*60*60)) % 24);
             @SuppressLint("DefaultLocale") String displayTime = String.format("%01d:%02d:%02d", hours, minutes, seconds);
 
-            canvas.drawText(displayTime, 10, 50, paint);
+            canvas.drawText(displayTime, Constant.TIME_TEXT_X, Constant.TIME_TEXT_Y, paint);
 
-            canvas.drawText(String.valueOf(score), 200, 50, paint);
+            canvas.drawText(String.valueOf(score), Constant.SCORE_TEXT_X, Constant.SCORE_TEXT_Y, paint);
 
             getHolder().unlockCanvasAndPost(canvas);
         }

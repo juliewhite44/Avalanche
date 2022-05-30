@@ -2,7 +2,6 @@ package com.example.avalanche;
 
 public class Ball extends Circle {
     private int sizeCounter = 0;
-    private final int minBallSize = 25;
 
     public Ball(int x, int y, int diameter) {
         super(x, y, diameter);
@@ -30,6 +29,6 @@ public class Ball extends Circle {
     }
 
     public boolean isBallTooSmall() {
-        return diameter<minBallSize;
+        return diameter < Constant.MIN_BALL_SIZE;
     }
 }

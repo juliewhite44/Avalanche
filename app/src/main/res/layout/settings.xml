@@ -4,59 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/background" />
+
     <TextView
         android:id="@+id/menu"
-        android:layout_width="178dp"
-        android:layout_height="93dp"
+        android:layout_width="295dp"
+        android:layout_height="91dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="116dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="58dp"
         android:layout_marginTop="126dp"
-        android:layout_marginEnd="116dp"
+        android:layout_marginEnd="58dp"
         android:gravity="center"
         android:text="@string/settings"
-        android:textSize="20sp" />
-
-    <Button
-        android:id="@+id/back"
-        android:layout_width="177dp"
-        android:layout_height="71dp"
-        android:layout_below="@+id/chill"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="116dp"
-        android:layout_marginBottom="63dp"
-        android:gravity="center"
-        android:text="@string/back"
-        android:textSize="20sp" />
+        android:textColor="#000000"
+        android:textSize="40sp" />
 
     <Button
         android:id="@+id/sound"
-        android:layout_width="180dp"
-        android:layout_height="69dp"
+        android:layout_width="208dp"
+        android:layout_height="94dp"
         android:layout_below="@+id/menu"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="116dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="102dp"
         android:layout_marginTop="68dp"
-        android:layout_marginEnd="116dp"
-        android:text="@string/sound_on"
+        android:layout_marginEnd="101dp"
+        android:text=""
         android:textSize="20sp" />
 
     <Button
         android:id="@+id/chill"
-        android:layout_width="180dp"
-        android:layout_height="69dp"
+        android:layout_width="208dp"
+        android:layout_height="94dp"
         android:layout_below="@+id/sound"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="42dp"
-        android:layout_marginEnd="116dp"
-        android:text="@string/chill_mode"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="99dp"
+        android:text=""
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_alignEnd="@+id/menu"
+        android:layout_alignBottom="@+id/menu"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="-43dp"
+        android:layout_marginBottom="138dp"
+        android:gravity="center"
+        android:text="@string/back"
         android:textSize="20sp" />
 </RelativeLayout>

@@ -5,5 +5,5 @@ import androidx.room.RoomDatabase;
 
 @Database(entities = {ScoreDb.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract ScoreDbDao userDao();
+    public abstract ScoreDbDao scoreDbDao();
 }

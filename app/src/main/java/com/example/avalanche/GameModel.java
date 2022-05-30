@@ -1,5 +1,6 @@
 package com.example.avalanche;
 
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
 
@@ -13,73 +14,90 @@ public class GameModel {
     private final Ball ball;
     private final int height;
     private final int width;
-    private final Point backgroundPoint1;
-    private final Point backgroundPoint2;
+    private final Point upper_left_point1;
+    private final Point upper_left_point2;
     private LinkedList<Obstacle> Obstacles;
     private int updateCounter;
     private double speedMultiplication;
     private long score;
+    private boolean isCollisionNow;
 
     GameModel(int width, int height) {
         this.width = width;
         this.height = height;
-        ball = new Ball(width/2, 3*height/5, 50);
-        backgroundPoint1 = new Point(0, 0);
-        backgroundPoint2 = new Point(0, -height);
-        updateCounter = 0;
+        ball = new Ball((int)(Constant.BALL_PLACEMENT_X*width), (int)(Constant.BALL_PLACEMENT_Y*height), Constant.BALL_DIAMETER);
+        upper_left_point1 = new Point(0, 0);
+        upper_left_point2 = new Point(0, -height);
+        updateCounter = Constant.FRAME_DELAY;
         Obstacles = new LinkedList<>();
         score = 0;
     }
 
+    private Obstacle getNewObstacle() {
+        Random random = new Random();
+        int randomNumber = random.nextInt(5);
+        Obstacle obstacle;
+        if(randomNumber == 0) obstacle = new Obstacle(random.nextInt(width), 0, Constant.OBSTACLE_DIAMETER, true);
+        else obstacle = new Obstacle(random.nextInt(width), 0, Constant.OBSTACLE_DIAMETER, false);
+        return obstacle;
+    }
+
+    private void moveBackground() {
+        if(upper_left_point1.y >= 0) {
+            upper_left_point1.y += height*speedMultiplication;
+            upper_left_point2.y = upper_left_point1.y - height;
+            if(upper_left_point1.y > height) {
+                upper_left_point1.y = -height;
+            }
+        }
+        else {
+            upper_left_point2.y += height*speedMultiplication;
+            upper_left_point1.y = upper_left_point2.y - height;
+            if(upper_left_point2.y > height) {
+                upper_left_point2.y = -height;
+            }
+        }
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     public boolean update() {
-        if(updateCounter == 40) {
+        isCollisionNow = false;
+        if(updateCounter < 0) {
+            updateCounter++;
+            return true;
+        }
+        if(updateCounter == Constant.FRAMES_BETWEEN_OBJECTS) {
             updateCounter = 0;
-            Random random = new Random();
-            int randomNumber = random.nextInt(5);
-            Obstacle obstacle;
-            if(randomNumber == 0) obstacle = new Obstacle(random.nextInt(width), 0, 200, true);
-            else obstacle = new Obstacle(random.nextInt(width), 0, 200, false);
-            Obstacles.add(obstacle);
+            Obstacles.add(getNewObstacle());
         }
         updateCounter++;
         ball.increaseSize();
 
-        speedMultiplication = 0.00033*Math.sqrt(ball.diameter);
+        speedMultiplication = Constant.SPEED_MULTIPLIER*Math.sqrt(ball.diameter);
 
-        if(backgroundPoint1.y >= 0) {
-            backgroundPoint1.y += height*speedMultiplication;
-            backgroundPoint2.y = backgroundPoint1.y - height;
-            if(backgroundPoint1.y > height) {
-                backgroundPoint1.y = -height;
-            }
-        }
-        else {
-            backgroundPoint2.y += height*speedMultiplication;
-            backgroundPoint1.y = backgroundPoint2.y - height;
-            if(backgroundPoint2.y > height) {
-                backgroundPoint2.y = -height;
-            }
-        }
+        moveBackground();
+
 
         for(Obstacle obstacle: Obstacles) {
             obstacle.updateObstacle(height, speedMultiplication);
             if(ball.collision(obstacle)) {
+                isCollisionNow = true;
                 if(obstacle.isRed()) score+= (long) ball.getDiameter() * ball.getDiameter();
                 obstacle.setDeletionFlag(true);
                 ball.decreaseSize();
             }
         }
         Obstacles.removeIf(Obstacle::isDeletionFlag);
+        if(Settings.isChillMode()) return true;
         return !ball.isBallTooSmall();
     }
 
-    public Point getBackgroundPoint1() {
-        return backgroundPoint1;
+    public Point getUpper_left_point1() {
+        return upper_left_point1;
     }
 
-    public Point getBackgroundPoint2() {
-        return backgroundPoint2;
+    public Point getUpper_left_point2() {
+        return upper_left_point2;
     }
 
     public Ball getBall() {
@@ -92,5 +110,9 @@ public class GameModel {
 
     public long getScore() {
         return score;
+    }
+
+    public boolean isCollisionNow() {
+        return isCollisionNow;
     }
 }
