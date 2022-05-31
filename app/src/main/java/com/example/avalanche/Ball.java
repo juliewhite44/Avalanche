@@ -8,6 +8,7 @@ public class Ball extends Circle {
     }
 
     public void updateBall(float xAcceleration, int screenWidth) {
+        //update ball x,y positions
         coordinates.x -= xAcceleration*0.5;
         if (coordinates.x > screenWidth - diameter) {
             coordinates.x = screenWidth - diameter;
@@ -19,7 +20,7 @@ public class Ball extends Circle {
 
     public void increaseSize() {
         sizeCounter++;
-        if(sizeCounter == 4) {
+        if(sizeCounter == 4) { //increasing size every 4 frames
             sizeCounter = 0;
             diameter++;
         }

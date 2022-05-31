@@ -21,6 +21,7 @@ public class InsertUsername extends AppCompatActivity {
             setUsernameAndInsertScore(inputUsername.getText().toString());
 
             Intent intent = new Intent(InsertUsername.this, GameOver.class);
+            //extras for GameOver
             intent.putExtra(Constant.INTENT_EXTRA_SCORE_KEY, getIntent().getExtras().getLong(Constant.INTENT_EXTRA_SCORE_KEY));
             intent.putExtra(Constant.INTENT_EXTRA_TIME_KEY, getIntent().getExtras().getString(Constant.INTENT_EXTRA_TIME_KEY));
             startActivity(intent);
@@ -32,6 +33,7 @@ public class InsertUsername extends AppCompatActivity {
 
         ScoreDb scoreDb = new ScoreDb();
         scoreDb.name = username;
+        //extras from gameActivity
         scoreDb.score = getIntent().getExtras().getLong(Constant.INTENT_EXTRA_SCORE_KEY);
         db.scoreDbDao().insertAll(scoreDb);
     }

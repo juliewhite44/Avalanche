@@ -22,7 +22,10 @@ public class GameOver extends Activity {
         setContentView(R.layout.game_over);
 
         TextView gameOverText = findViewById(R.id.game_over_text);
-        gameOverText.setText("Game Over\nScore: " + getIntent().getExtras().getLong(Constant.INTENT_EXTRA_SCORE_KEY)+"\nTime: " + getIntent().getExtras().getString(Constant.INTENT_EXTRA_TIME_KEY));
+        gameOverText.setText(Constant.GAME_OVER_SCORE_TEXT +
+                getIntent().getExtras().getLong(Constant.INTENT_EXTRA_SCORE_KEY) +
+                Constant.GAME_OVER_TIME_TEXT +
+                getIntent().getExtras().getString(Constant.INTENT_EXTRA_TIME_KEY));
 
         back = findViewById(R.id.back);
         back.setOnClickListener(view -> {

@@ -8,7 +8,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-public interface ScoreDbDao {
+public interface ScoreDbDao { // dao=database access object
     @Query("SELECT * FROM scoredb")
     List<ScoreDb> getAll();
 

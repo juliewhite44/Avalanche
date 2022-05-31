@@ -17,9 +17,11 @@ import java.util.List;
 
 public class Highscores extends Activity {
     private void generateTable() {
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "avalanche-database").allowMainThreadQueries().build();
+        AppDatabase db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                "avalanche-database").allowMainThreadQueries().build();
         List<ScoreDb> list = db.scoreDbDao().getTopTen();
         TableLayout tableLayout = findViewById(R.id.table);
+        // -1 because of headers
         for(int i = -1; i < list.size(); i++) {
             TableRow tr = new TableRow(Highscores.this);
             tr.setLayoutParams(new TableRow.LayoutParams(

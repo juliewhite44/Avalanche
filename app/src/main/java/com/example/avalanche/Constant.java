@@ -24,4 +24,6 @@ public class Constant {
     public static final String TURN_CHILL_ON_TEXT = "Turn chill mode on";
     public static final String TURN_SOUND_OFF_TEXT = "Turn sounds off";
     public static final String TURN_SOUND_ON_TEXT = "Turn sounds on";
+    public static final String GAME_OVER_SCORE_TEXT = "Game Over\nScore: ";
+    public static final String GAME_OVER_TIME_TEXT = "\nTime: ";
 }

@@ -29,6 +29,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // accelerometer
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),SensorManager.SENSOR_DELAY_GAME);
 
@@ -66,8 +67,6 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         }
     }
 
-
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
@@ -86,6 +85,7 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
         long timeDiff;
         while(isPlaying) {
             beginTime = System.currentTimeMillis();
+            // game over
             if(!gameModel.update()) {
                 Intent intent = new Intent(GameActivity.this, InsertUsername.class);
                 intent.putExtra(Constant.INTENT_EXTRA_SCORE_KEY, gameModel.getScore());
@@ -99,7 +99,9 @@ public class GameActivity extends AppCompatActivity implements SensorEventListen
                 intent.putExtra(Constant.INTENT_EXTRA_TIME_KEY, displayTime);
                 startActivity(intent);
             }
-            if(gameModel.isCollisionNow() && Settings.isSound()) startService(new Intent(GameActivity.this, SnowballSoundService.class));
+            // currently in collision + sound on, play hit sound
+            if(gameModel.isCollisionNow() && Settings.isSound())
+                startService(new Intent(GameActivity.this, SnowballSoundService.class));
             gameView.draw(gameModel.getUpper_left_point1(), gameModel.getUpper_left_point2(),
                     gameModel.getBall(), gameModel.getObstacles(), gameModel.getScore());
             timeDiff = System.currentTimeMillis() - beginTime;
